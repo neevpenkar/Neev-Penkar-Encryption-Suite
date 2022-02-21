@@ -42,4 +42,11 @@ def NP_Encryption_Suite_V2(password, data):
     store['init_vector'] = "$$" + b64encode(store['init_vector']).decode() + "$$"
     store['salt'] = "$$" + b64encode(store['salt']).decode() + "$$"
 
+    # Masking of the key so it cannot be extracted from memory
+    # after the function has finished using the key
+    for i in key:
+      i = 'a'.encode()
+    del(key)
+    del(block_cipher)
+    
     return store
